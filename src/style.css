@@ -1,0 +1,129 @@
+@font-face {
+    font-family: custom;
+    src: url(SF-UI-Display-Light.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #34495E;
+    
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    position: relative;
+    height: 100vh;
+    font-weight: 500;
+    color: #ECEFF1;
+    font-family: custom;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 72px;
+    font-weight: 500;
+    color: #ECEFF1;
+    font-family: custom;
+}
+
+.del_button {
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    float: right;
+    background: none;
+    color: #34495E;
+}
+
+#player_button {
+    font-size: 48px;
+    background: #34495E;
+    border: none;
+    color: #D7DBDD;
+    cursor: pointer;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: sticky;
+}
+
+#icon {
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+
+#page {
+    padding: 0px 25% 0px 25%;
+}
+
+#flip {
+    padding: 5px;
+    font-size: 24px;
+    background: #34495E;
+    border: none;
+    color: #D7DBDD;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    border-radius: 25px;
+}
+
+#panel {
+    margin: 0 35% 0 35%;
+    padding: 20px;
+    display: none;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #D7DBDD;
+    margin-bottom: 15px;
+    color: #34495E;
+}
+
+ul {
+	list-style-type: none;
+    padding: 0px;
+}
+
+ul li {
+    background: #D7DBDD;
+    background-image: url("back.jpg");
+    color: #424949;
+    margin: 10px;
+    padding: 10px 16px;
+    border-radius: 20px;
+    background-size: cover;
+}
+
+ul li:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+input[type=text] {
+    background-color: white;
+    background-image: url('search.svg');
+    background-repeat: no-repeat;
+    padding: 12px 50px;
+    border: none;
+    border-radius: 25px;
+    width: 20%;
+    color: #34495E;
+    margin: 20px;
+    font-weight: 700;
+    font-family: custom;
+    font-size: 16px;
+}
