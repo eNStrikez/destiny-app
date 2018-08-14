@@ -53,7 +53,7 @@ var initButton = function(id){
 };
 
 var addItem = function(data){
-	$('ul').append('<li>' + data + '<button class="del_button" id="del_button' + id + '"><ion-icon id="icon" name="close"></ion-icon></button> </li>');
+	$('ul').append('<li><p>' + data + '</p><button class="del_button" id="del_button' + id + '"><ion-icon id="icon" name="close"></ion-icon></button> </li>');
 	initButton(id);
 	id++;
 }
