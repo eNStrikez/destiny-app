@@ -22,7 +22,7 @@ $(function(){
 			if (data.ErrorCode == 1)
 				if (typeof data.Response[0] != 'undefined'){
 					players[id] = data;
-					addItem(players[id].Response[0].displayName);
+					addItem(players[id]);
 				} else {
 					alert("Player not found");
 				}
@@ -45,15 +45,30 @@ var initButton = function(id){
 	});
 
 	$("li").hover(function(){
-		$(this).animate({padding: '40px 16px'}, "slow");
+		$(this).animate({padding: '40px 16px'}, {queue: false, duration: 1000});
+		$(this).find('.data').each(function(){
+			$(this).show(1000);
+		});
+		$(this).find('.del_button').each(function(){
+			$(this).show(1000);
+		});
 	},
 	function(){
-	    $(this).animate({padding: '10px 16px'}, "slow");
+	    $(this).animate({padding: '10px 16px'}, {queue: false, duration: 1000});
+	    $(this).find('.data').each(function(){
+			$(this).hide(1000);
+		});
+		$(this).find('.del_button').each(function(){
+			$(this).hide(1000);
+		});
 	});
 };
 
 var addItem = function(data){
-	$('ul').append('<li><p>' + data + '</p><button class="del_button" id="del_button' + id + '"><ion-icon id="icon" name="close"></ion-icon></button> </li>');
+	var name = '<p>' + data.Response[0].displayName + '</p>';
+	var type = '<p class="data" id="data' + id + '">' + data.Response[0].membershipType + '</p>';
+	var memberId = '<p class="data" id="data' + id + '">' + data.Response[0].membershipId + '</p>';
+	$('ul').append('<li>' + name + type + memberId + '<button class="del_button" id="del_button' + id + '"><ion-icon id="icon" name="close"></ion-icon></button></li>');
 	initButton(id);
 	id++;
 }

@@ -41,6 +41,7 @@ h1 {
     float: right;
     background: none;
     color: #34495E;
+    display: none;
 }
 
 #player_button {
@@ -111,7 +112,11 @@ ul li {
 
 p {
     background: none;
-    width: 90%;
+    width: 80%;
+}
+
+.data {
+    display: none;
 }
 
 ul li:hover {
@@ -127,7 +132,7 @@ input[type=text] {
     border-radius: 25px;
     width: 20%;
     color: #34495E;
-    margin: 20px;
+    
     font-weight: 700;
     font-family: custom;
     font-size: 16px;
