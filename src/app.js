@@ -2,7 +2,6 @@ var id = 0;
 var players = [];
 
 $(function(){
-
 	$('#flip').on('click', function(){
 		$("#panel").slideToggle("slow");
 	});
@@ -28,10 +27,33 @@ $(function(){
 				}
 		});
 	});
-
-	
-
 });
+
+var getProfile = function(type, memberID){
+	var input = type + "|" + memberID;
+		$.get('/destiny/' + input + ".pro", function(data, status){
+			if (data.ErrorCode == 1)
+				if (typeof data.Response[0] != 'undefined'){
+					return data;
+				} else {
+					alert("Player not found");
+					return null;
+				}
+		});
+}
+
+var getCharacter = function(type, memberID, characterID){
+	var input = type + "|" + memberID + "|" + characterID;
+		$.get('/destiny/' + input + ".chr", function(data, status){
+			if (data.ErrorCode == 1)
+				if (typeof data.Response[0] != 'undefined'){
+					return data;
+				} else {
+					alert("Player not found");
+					return null;
+				}
+		});
+}
 
 var initButton = function(id){ 
 	$('#del_button' + id).on('click', function() {
@@ -45,7 +67,6 @@ var initButton = function(id){
 	});
 
 	$("li").hover(function(){
-		$(this).animate({padding: '40px 16px'}, {queue: false, duration: 1000});
 		$(this).find('.data').each(function(){
 			$(this).show(1000);
 		});
@@ -53,8 +74,7 @@ var initButton = function(id){
 			$(this).show(1000);
 		});
 	},
-	function(){
-	    $(this).animate({padding: '10px 16px'}, {queue: false, duration: 1000});
+	function(){    
 	    $(this).find('.data').each(function(){
 			$(this).hide(1000);
 		});
@@ -68,6 +88,9 @@ var addItem = function(data){
 	var name = '<p>' + data.Response[0].displayName + '</p>';
 	var type = '<p class="data" id="data' + id + '">' + data.Response[0].membershipType + '</p>';
 	var memberId = '<p class="data" id="data' + id + '">' + data.Response[0].membershipId + '</p>';
+
+	var profile = getProfile(data.Response[0].membershipType, data.Response[0].membershipId);
+
 	$('ul').append('<li>' + name + type + memberId + '<button class="del_button" id="del_button' + id + '"><ion-icon id="icon" name="close"></ion-icon></button></li>');
 	initButton(id);
 	id++;

@@ -7,8 +7,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: #34495E;
-    
 }
 
 *:focus {
@@ -22,6 +20,9 @@ body {
     color: #ECEFF1;
     font-family: custom;
     font-size: 16px;
+    background: url(back.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 h1 {
@@ -29,6 +30,28 @@ h1 {
     font-weight: 500;
     color: #ECEFF1;
     font-family: custom;
+    background-color: #34495E; 
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #1ABC9C;
+    font-weight: 700;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #34495E;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: #1ABC9C;
+}
+
+.topnav a:hover {
+    background-color: #A3E4D7;
+    color: black;
 }
 
 .del_button {
@@ -46,15 +69,15 @@ h1 {
 
 #player_button {
     font-size: 48px;
-    background: #34495E;
+    background: none;
     border: none;
     color: #D7DBDD;
     cursor: pointer;
     display: block;
-    vertical-align: middle;
-    text-align: center;
-    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: auto;
+    margin-left: auto;
     position: sticky;
 }
 
@@ -65,13 +88,13 @@ h1 {
 }
 
 #page {
-    padding: 0px 25% 0px 25%;
+    padding: 0px 10% 0px 10%;
 }
 
 #flip {
     padding: 5px;
     font-size: 24px;
-    background: #34495E;
+    background: none;
     border: none;
     color: #D7DBDD;
     display: block;
@@ -79,8 +102,6 @@ h1 {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
-    border-radius: 25px;
 }
 
 #panel {
@@ -98,11 +119,12 @@ h1 {
 ul {
 	list-style-type: none;
     padding: 0px;
+    background: none;
 }
 
 ul li {
-    background: #D7DBDD;
-    background-image: url("back.jpg");
+    background: none;
+    background-image: url("list-back.jpg");
     color: #424949;
     margin: 10px;
     padding: 10px 16px;
@@ -128,11 +150,11 @@ input[type=text] {
     background-image: url('search.svg');
     background-repeat: no-repeat;
     padding: 12px 50px;
+    margin-top: 10px;
     border: none;
     border-radius: 25px;
     width: 20%;
     color: #34495E;
-    
     font-weight: 700;
     font-family: custom;
     font-size: 16px;
