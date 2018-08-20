@@ -59,8 +59,8 @@ h1 {
     border: none;
     cursor: pointer;
     display: inline-block;
-    vertical-align: middle;
     margin-left: 10px;
+    margin-bottom: 10px;
     float: right;
     background: none;
     color: #34495E;

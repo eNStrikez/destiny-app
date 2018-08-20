@@ -17,10 +17,11 @@ http.createServer(function (req, res) {
   	var q = url.parse(req.url, true);
   	console.log(q.pathname);
   	if (q.pathname.startsWith(destinyPath)) {
+  		console.log(path.extname(q.pathname));
   		if (path.extname(q.pathname) == '.pla') {
 	  		var name = q.pathname.slice(destinyPath.length, -4);
 	  		console.log("searching for player " + name);
-			traveler.getProfile('-1', name).then(player => {
+			traveler.searchDestinyPlayer('-1', name).then(player => {
 				res.writeHead(200, {'Content-Type': 'text/json'});
 				res.write(JSON.stringify(player));
 				return res.end();
@@ -28,11 +29,11 @@ http.createServer(function (req, res) {
 				return res.end("Error: " + err);
 			});
 		} else if (path.extname(q.pathname) == '.pro') {
-			var link = q.pathname.slice(destinyPath.length, -4).split('|');
+			var link = q.pathname.slice(destinyPath.length, -4).split('.');
 			var type = link[0];
 			var id = link[1];
 	  		console.log("searching for profile of player " + id);
-			traveler.searchDestinyPlayer(type, id, { components: ['100', '101', '102', '103', '104'] }).then(player => {
+			traveler.getProfile(type, id, { components: ['100', '101', '102', '103', '104'] }).then(player => {
 				res.writeHead(200, {'Content-Type': 'text/json'});
 				res.write(JSON.stringify(player));
 				return res.end();
@@ -40,12 +41,12 @@ http.createServer(function (req, res) {
 				return res.end("Error: " + err);
 			});
 		} else if (path.extname(q.pathname) == '.chr') {
-			var link = q.pathname.slice(destinyPath.length, -4).split('|');
+			var link = q.pathname.slice(destinyPath.length, -4).split('.');
 			var type = link[0];
 			var id = link[1];
 			var chrID = link[2];
 	  		console.log("searching for character " + chrID + " of player " + id);
-			traveler.searchCharacter(type, id, chrID, { components: ['200', '201', '202', '203', '204', '205'] }).then(player => {
+			traveler.getCharacter(type, id, chrID, { components: ['200', '201', '202', '203', '204', '205'] }).then(player => {
 				res.writeHead(200, {'Content-Type': 'text/json'});
 				res.write(JSON.stringify(player));
 				return res.end();
