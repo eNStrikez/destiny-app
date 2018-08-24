@@ -3,8 +3,10 @@ var fs = require('fs');
 var url = require('url');
 var mime = require('mime');
 var path = require('path');
+var sqlite = require('sqlite3').verbose();
 
 var Traveler = require('the-traveler').default;
+var Manifest = require('the-traveler/build/Manifest');
 const Enums = require('the-traveler/build/enums');
 const destinyPath = "/destiny/";
 
@@ -12,12 +14,22 @@ const traveler = new Traveler({
     apikey: '8772b2e2b07b465e9ce39bd9b51184f6',
     userAgent: 'eNStrikez%232333'
 });
+var db = new sqlite.Database('./manifest.content');
+
+
+// traveler.getDestinyManifest().then(result => {
+//     traveler.downloadManifest(result.Response.mobileWorldContentPaths.en, './manifest.content').then(filepath => {
+//         console.log(filepath);
+//         db = new sqlite.Database(filepath);
+// 		console.log("Manifest loaded");
+//     }).catch(err => {
+//         console.log(err);
+//     })
+// })
 
 http.createServer(function (req, res) {
   	var q = url.parse(req.url, true);
-  	console.log(q.pathname);
   	if (q.pathname.startsWith(destinyPath)) {
-  		console.log(path.extname(q.pathname));
   		if (path.extname(q.pathname) == '.pla') {
 	  		var name = q.pathname.slice(destinyPath.length, -4);
 	  		console.log("searching for player " + name);
@@ -52,6 +64,18 @@ http.createServer(function (req, res) {
 				return res.end();
 			}).catch(err => {
 				return res.end("Error: " + err);
+			});
+		} else if (path.extname(q.pathname) == '.item') {
+			var hash = q.pathname.slice(destinyPath.length, -4).split('.')[0];
+			console.log("searching for item " + hash);
+			res.writeHead(200, {'Content-Type': 'text/json'});
+			db.serialize(function(){
+				let query = "SELECT json FROM DestinyInventoryItemDefinition WHERE id + 4294967296 = " + hash + " OR id = " + hash;
+				db.each(query, function(err, row){
+					if(err) console.log("Error: " + err);
+					res.write(JSON.stringify(row));
+					return res.end();
+				});
 			});
 		}
   	} else {

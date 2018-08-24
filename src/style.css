@@ -22,7 +22,7 @@ body {
     font-size: 16px;
     background: url(back.png);
     background-repeat: no-repeat;
-    background-size: cover;
+    /*background-size: cover;*/
 }
 
 h1 {
