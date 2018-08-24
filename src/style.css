@@ -116,6 +116,11 @@ h1 {
     color: #34495E;
 }
 
+#character0, #character1, #character2 {
+    vertical-align: middle;
+    color: #F2F3F4;
+}
+
 ul {
 	list-style-type: none;
     padding: 0px;

@@ -154,14 +154,17 @@ var addProfile = function(type, memberID, data){
 };
 
 var addCharacter = function(data, currentID){
+	var index = 0;
 	if (players[currentID].character[data.Response.character.data.classType] == 0) {
 		players[currentID].setCharacter(data.Response.character.data.classType, data);
+		index = data.Response.character.data.classType;
 	} else { 
 		let n = 0;
 		while (players[currentID].character[n] == 0) {
 			n++;
 		}
 		players[currentID].setCharacter(n, data);
+		index = n;
 	}
 	var dClass = "";
 	switch(data.Response.character.data.classType){
@@ -173,17 +176,20 @@ var addCharacter = function(data, currentID){
 			break;
 		default: dClass = "Unknown";
 	}
-	var emblemData = getItem(data.Response.character.data.emblemHash);
-	var emblem = img(path + emblemData.secondaryOverlay);
+
 	var ll = data.Response.character.data.light;
+	$.get('/destiny/' + data.Response.character.data.emblemHash + ".item", function(data, status){
+		var emblemData = JSON.parse(data.json);
+		var emblem = img(path + emblemData.secondaryOverlay);
+		$('#del_button' + currentID).before('<div id="character' + index + '"><p class="data" id="data' + currentID + '">' + emblem + dClass + " " + ll + '</p></div>');
+		$("#character" + index).css("background-image", 'url(' + path + emblemData.secondarySpecial + ')');
+	});
 
 	var equipment = data.Response.equipment.data.items;
-	for (var i = 0; i < equipment.length; i++) {
-		getItem(equipment[i].itemHash, currentID);
-	}
-
-	$('#del_button' + currentID).before('<div id="character"><p class="data" id="data' + id + '">' + emblem + dClass + " " + ll + '</p></div>');
-	$("#character").css("background-image", path + emblemData.secondarySpecial);
+	//for (var i = 0; i < equipment.length; i++) {
+	//	getItem(equipment[i].itemHash, currentID);
+	//}	
+	initData();
 };
 
 var addItem = function(data, currentID){

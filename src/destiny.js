@@ -17,15 +17,15 @@ const traveler = new Traveler({
 var db = new sqlite.Database('./manifest.content');
 
 
-// traveler.getDestinyManifest().then(result => {
-//     traveler.downloadManifest(result.Response.mobileWorldContentPaths.en, './manifest.content').then(filepath => {
-//         console.log(filepath);
-//         db = new sqlite.Database(filepath);
-// 		console.log("Manifest loaded");
-//     }).catch(err => {
-//         console.log(err);
-//     })
-// })
+traveler.getDestinyManifest().then(result => {
+    traveler.downloadManifest(result.Response.mobileWorldContentPaths.en, './manifest.content').then(filepath => {
+        console.log(filepath);
+        db = new sqlite.Database(filepath);
+		console.log("Manifest loaded");
+    }).catch(err => {
+        console.log(err);
+    })
+})
 
 http.createServer(function (req, res) {
   	var q = url.parse(req.url, true);
